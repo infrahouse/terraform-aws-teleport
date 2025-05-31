@@ -1,0 +1,42 @@
+---
+name: 'Terraform CI'
+
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+
+permissions:
+  id-token: write  # This is required for requesting the JWT
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform Test'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner
+    # is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Install the latest version of Terraform CLI
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+
+      # Prepare Python environment
+      - name: Setup Python Environment
+        run: make bootstrap
+
+      # Run all required linters
+      - name: Code Style Check
+        run: make lint
