@@ -29,7 +29,7 @@ Create a Teleport cluster. Note, you need to add the instance role as a secret r
 ```hcl
 module "teleport" {
   source  = "infrahouse/teleport/aws"
-  version = "0.2.3"
+  version = "1.0.0"
   
   backend_subnet_ids  = module.management.subnet_private_ids
   environment         = var.environment
