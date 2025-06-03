@@ -15,8 +15,8 @@ module "instance_profile" {
       dynamodb : aws_iam_policy.dynamodb.arn
       s3 : aws_iam_policy.s3.arn
       TeleportEC2Discovery : aws_iam_policy.TeleportEC2Discovery.arn
-      TeleportEC2DiscoveryBoundary : aws_iam_policy.TeleportEC2DiscoveryBoundary.arn
       RDSDiscovery : aws_iam_policy.RDSDiscovery.arn
+      TeleportIdentitySecurity: aws_iam_policy.TeleportIdentitySecurity.arn
     }
   )
 }
@@ -85,6 +85,8 @@ data "aws_iam_policy_document" "dynamodb" {
 }
 
 resource "aws_iam_policy" "dynamodb" {
+  name_prefix = "teleport-dynamodb-"
+  description = "Teleport stores configuration for authentication services in DynamoDB."
   policy = data.aws_iam_policy_document.dynamodb.json
 }
 
@@ -101,5 +103,7 @@ data "aws_iam_policy_document" "s3" {
 }
 
 resource "aws_iam_policy" "s3" {
+  name_prefix = "teleport-s3-"
+  description = "Teleport stores session records in S3."
   policy = data.aws_iam_policy_document.s3.json
 }

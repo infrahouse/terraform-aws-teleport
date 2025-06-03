@@ -18,5 +18,7 @@ data "aws_iam_policy_document" "RDSDiscovery" {
 }
 
 resource "aws_iam_policy" "RDSDiscovery" {
+  name_prefix = "teleport-RDSDiscovery-"
+  description = "Teleport uses these permissions to discover and connect to RDS instances."
   policy = data.aws_iam_policy_document.RDSDiscovery.json
 }
