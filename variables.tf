@@ -1,15 +1,3 @@
-variable "asg_min_size" {
-  description = "Minimum number of instances in ASG"
-  type        = number
-  default     = null
-}
-
-variable "asg_max_size" {
-  description = "Maximum number of instances in ASG"
-  type        = number
-  default     = null
-}
-
 variable "backend_subnet_ids" {
   description = "Subnets to use for the Teleport server"
   type        = list(string)
