@@ -56,7 +56,7 @@ data "aws_iam_policy_document" "TeleportIdentitySecurity" {
       "iam:ListSAMLProviders",
       "iam:GetSAMLProvider",
       "iam:ListOpenIDConnectProviders",
-      "iam:GetOpenIDConnectProvider"    ]
+    "iam:GetOpenIDConnectProvider"]
     resources = ["*"]
   }
 }
@@ -64,5 +64,5 @@ data "aws_iam_policy_document" "TeleportIdentitySecurity" {
 resource "aws_iam_policy" "TeleportIdentitySecurity" {
   name_prefix = "teleport-identity-security-"
   description = "The policy is designed with a set of read-only actions, enabling Teleport to access and retrieve information from resources within your AWS Account."
-  policy = data.aws_iam_policy_document.TeleportIdentitySecurity.json
+  policy      = data.aws_iam_policy_document.TeleportIdentitySecurity.json
 }
