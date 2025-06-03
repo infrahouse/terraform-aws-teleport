@@ -100,8 +100,8 @@ locals {
 
 resource "aws_autoscaling_group" "teleport" {
   name                      = local.asg_name
-  min_size                  = var.asg_min_size == null ? length(var.backend_subnet_ids) : var.asg_min_size
-  max_size                  = var.asg_max_size == null ? length(var.backend_subnet_ids) + 1 : var.asg_max_size
+  min_size                  = 1
+  max_size                  = 2
   vpc_zone_identifier       = var.backend_subnet_ids
   health_check_type         = "ELB"
   health_check_grace_period = 900
@@ -134,7 +134,8 @@ resource "aws_autoscaling_group" "teleport" {
   instance_refresh {
     strategy = "Rolling"
     preferences {
-      min_healthy_percentage = 100
+      min_healthy_percentage = 90
+      max_healthy_percentage = 100
     }
   }
   tag {
