@@ -134,7 +134,7 @@ resource "aws_autoscaling_group" "teleport" {
   instance_refresh {
     strategy = "Rolling"
     preferences {
-      min_healthy_percentage = 90
+      min_healthy_percentage = 50
       max_healthy_percentage = 100
     }
   }
