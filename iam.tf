@@ -28,6 +28,7 @@ data "aws_iam_policy" "ssm" {
 data "aws_iam_policy_document" "default_permissions" {
   statement {
     actions = [
+      "sts:AssumeRole",
       "sts:GetCallerIdentity",
     ]
     resources = [

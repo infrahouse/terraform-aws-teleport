@@ -101,7 +101,7 @@ locals {
 resource "aws_autoscaling_group" "teleport" {
   name                      = local.asg_name
   min_size                  = 1
-  max_size                  = 2
+  max_size                  = 1
   vpc_zone_identifier       = var.backend_subnet_ids
   health_check_type         = "ELB"
   health_check_grace_period = 900
@@ -142,6 +142,11 @@ resource "aws_autoscaling_group" "teleport" {
     key                 = "Name"
     propagate_at_launch = true
     value               = "teleport"
+  }
+  tag {
+    key                 = "teleport.dev/discovery"
+    propagate_at_launch = true
+    value               = "false"
   }
   dynamic "tag" {
     for_each = merge(
