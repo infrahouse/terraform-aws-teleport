@@ -1,6 +1,6 @@
 module "userdata" {
   source                   = "registry.infrahouse.com/infrahouse/cloud-init/aws"
-  version                  = "1.18.0"
+  version                  = "2.2.0"
   environment              = var.environment
   role                     = "teleport"
   puppet_debug_logging     = var.puppet_debug_logging
