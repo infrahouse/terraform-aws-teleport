@@ -5,7 +5,7 @@ resource "random_string" "profile-suffix" {
 
 module "instance_profile" {
   source       = "registry.infrahouse.com/infrahouse/instance-profile/aws"
-  version      = "1.8.1"
+  version      = "1.9.0"
   profile_name = "teleport-${random_string.profile-suffix.result}"
   role_name    = "teleport-${random_string.profile-suffix.result}"
   permissions  = data.aws_iam_policy_document.default_permissions.json
